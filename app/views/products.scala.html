@@ -1,3 +1,11 @@
 @* products Template File *@
-@(param: Any)
-@param
+@(products: List[models.Product])
+@index("Products") {
+	<ul>
+	@for(product <- products) {
+		<li>
+			<a href="products/@product.getId()">@product.getName()</a>
+		</li>	
+	}
+	</ul>
+}
