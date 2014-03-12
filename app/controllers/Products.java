@@ -21,11 +21,10 @@ public class Products extends Controller {
 		put("3", new Product(3, "test3", "testerer3", 320, new LinkedList<Category>(Arrays.asList(new Category(1, "cat1"),new Category(2, "cat2")))));	
 		put("4", new Product(4, "test4", "testerer4", 430, new LinkedList<Category>(Arrays.asList(new Category(1, "cat1"), new Category(2, "cat2")))));	
 	}};
-	
 
     public static Result allProducts() {
-    	
-        return ok(products.render(getAllProductsFromRepo()));
+    	String category  = request().getQueryString("cat");
+        return ok(products.render(getAllProductsFromRepo(category)));
     }
 
     public static Result product(String id) {
@@ -35,11 +34,23 @@ public class Products extends Controller {
     	}
         return ok(product.render(prod));
     }
+    
 
-    private static List<Product> getAllProductsFromRepo() {
+    private static List<Product> getAllProductsFromRepo(String category) {
     	List<Product> allProducts;
     	allProducts = new LinkedList<>(productRepo.values());
-    	return allProducts;
+    	if (category == null) {
+    		return allProducts;
+    	}
+    	List<Product> filteredProducts = new LinkedList<>();
+    	for (Product prod: allProducts) {
+    		for (Category cat: prod.getCategories()) {
+    			if (cat.getName().equals(category)) {
+    				filteredProducts.add(prod);
+    			}
+    		}
+    	}
+    	return filteredProducts;
     }
     
     private static Product getProductFromRepo(String id) {

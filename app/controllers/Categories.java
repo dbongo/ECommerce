@@ -8,7 +8,13 @@ import views.html.*;
 public class Categories extends Controller {
 
     public static Result allCategories() {
-        return ok(categories.render("Look at this beautiful list of invisible categories"));
+    	
+    	String str = request().getQueryString("category");
+    	
+    	if (str == null) {
+    		str = "nope";
+    	}
+        return ok(categories.render(str));
     }
 
     public static Result category(String id) {
