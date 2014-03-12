@@ -4,8 +4,10 @@
 
 # Home page
 GET     /                           controllers.Application.index()
-GET     /products    	            controllers.Products.products()
-GET     /categories                 controllers.Categories.categories()
+GET     /products    	            controllers.Products.allProducts()
+GET     /products/:id    	        controllers.Products.product(id)
+GET     /categories                 controllers.Categories.allCategories()
+GET     /categories/:id             controllers.Categories.category(id)
 GET     /checkout                   controllers.Checkout.checkout()
 GET     /cart                       controllers.Cart.cart()
 
