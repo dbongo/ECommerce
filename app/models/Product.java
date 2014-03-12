@@ -7,16 +7,15 @@ public class Product {
 	private final int id;
 	private final String name;
 	private final String description;
-	private final int priceInCent;
+	private final double price;
 	private final List<Category> categories;
 
-	public Product(int id, String name, String description, int priceInCent, List<Category> categories) {
+	public Product(int id, String name, String description, double price, List<Category> categories) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.priceInCent = priceInCent;
-		this.categories = categories;
-		
+		this.price = price;
+		this.categories = categories;	
 	}
 
 	public int getId() {
@@ -31,8 +30,8 @@ public class Product {
 		return description;
 	}
 
-	public int getPriceInCent() {
-		return priceInCent;
+	public double getPrice() {
+		return price;
 	}
 
 	public List<Category> getCategories() {

@@ -1,2 +1,37 @@
-@* product Template File *@
-@(param: Any)
+@(product: models.Product)
+
+@index("Product") {
+	<h2>@product.getName()</h2>
+	
+	<table>
+		<tbody>
+			<tr>
+				<td>
+					<b>Description:</b>
+				</td>
+				<td>
+					@product.getDescription()
+				</td>
+			</tr>
+			<tr>
+				<td>
+					 <b>Price</b>
+				</td>
+				<td>
+					 @product.getPrice()
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<b>Categories:</b>
+				</td>
+				<td>
+					@for(category <- product.getCategories()) {
+						@category.getName()
+						<br>
+					}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+}
