@@ -1,37 +1,39 @@
 @(product: models.Product)
 
 @index("Product") {
-	<h2>@product.getName()</h2>
-	
-	<table>
-		<tbody>
-			<tr>
-				<td>
-					<b>Description:</b>
-				</td>
-				<td>
-					@product.getDescription()
-				</td>
-			</tr>
-			<tr>
-				<td>
-					 <b>Price</b>
-				</td>
-				<td>
-					 @product.getPrice()
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<b>Categories:</b>
-				</td>
-				<td>
-					@for(category <- product.getCategories()) {
-						<a href="/products?cat=@category.getName()">@category.getName()</a>
-						<br>
-					}
-				</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="container fluid">
+		<h2>@product.getName()</h2>
+		<hr>
+		<table>
+			<tbody>
+				<tr>
+					<td>
+						<b>Description:</b>
+					</td>
+					<td>
+						@product.getDescription()
+					</td>
+				</tr>
+				<tr>
+					<td>
+						 <b>Price</b>
+					</td>
+					<td>
+						 @product.getPrice()
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>Categories:</b>
+					</td>
+					<td>
+						@for(category <- product.getCategories()) {
+							<a href="/products?cat=@category.getName()">@category.getName()</a>
+							<br>
+						}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 }
