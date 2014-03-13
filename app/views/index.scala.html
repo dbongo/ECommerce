@@ -9,10 +9,27 @@
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </head><body>
-	<div class="container">
-	<h1>This is my awesome webshop!</h1>
+	<div class="jumbotron">
+		<div class="container">
+			<h1>This is my awesome webshop!</h1>
+		</div>
 	</div>
-	<div class="container">
-		@content
+	<div class="container well">
+		<div class="well col-sm-2 nav-section">
+			<ul>
+				<li>
+					<a href="/">Hem</a>		
+				</li>
+				<li>
+					<a href="/products">Products</a>		
+				</li>
+				<li>
+					<a href="/categories">Categories</a>
+				</li>
+			</ul>
+		</div>
+		<div class="col-sm-9">
+			@content
+		</div>
 	</div>
 </body></html>

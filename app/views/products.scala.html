@@ -1,11 +1,18 @@
 @* products Template File *@
 @(products: List[models.Product])
 @index("Products") {
-	<ul>
+	<div class="container-fluid">
+	<h2>Products</h2>
+	</div>
+	<br>
 	@for(product <- products) {
-		<li>
-			<a href="products/@product.getId()">@product.getName()</a>
-		</li>	
+		<a href="/products/@product.getId()">
+			<dic class="col-sm-3 product-thumbnail">
+				<img src="assets/images/@product.getImgUrl()" alt="@product.getName()" class="img-rounded">
+				<h4>@product.getName()</h4>
+			</dic>
+		</a>
 	}
-	</ul>
+	
+
 }

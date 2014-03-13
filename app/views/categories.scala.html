@@ -1,3 +1,17 @@
 @* categories Template File *@
-@(param: Any)
-@param
+@(categories: List[models.Category])
+@index("Categories") {
+	<div class="container-fluid">
+		<h2>Categories</h2>
+	</div>
+	<br>
+	@for(category <- categories) {
+		<a href="/products?cat=@category.getName()">
+			<div class="col-sm-3">
+				<i class="fa @category.getIcon() fa-5x"></i>
+				<br>
+				<h4>@category.getName()</h4>
+			</div>
+		</a>		
+	}	
+}

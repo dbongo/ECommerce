@@ -27,7 +27,7 @@
 				</td>
 				<td>
 					@for(category <- product.getCategories()) {
-						@category.getName()
+						<a href="/products?cat=@category.getName()">@category.getName()</a>
 						<br>
 					}
 				</td>

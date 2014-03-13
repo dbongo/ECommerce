@@ -9,11 +9,13 @@ public class Product {
 	private final String description;
 	private final double price;
 	private final List<Category> categories;
+	private final String imgUrl;
 
-	public Product(int id, String name, String description, double price, List<Category> categories) {
+	public Product(int id, String name, String description, String imgUrl, double price, List<Category> categories) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
+		this.imgUrl = imgUrl;
 		this.price = price;
 		this.categories = categories;	
 	}
@@ -36,5 +38,9 @@ public class Product {
 
 	public List<Category> getCategories() {
 		return categories;
+	}
+
+	public String getImgUrl() {
+		return imgUrl;
 	}
 }
