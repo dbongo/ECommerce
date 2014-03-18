@@ -2,14 +2,25 @@ package models;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
+@Entity
 public class Product {
 
-	private final int id;
-	private final String name;
-	private final String description;
-	private final double price;
-	private final List<Category> categories;
-	private final String imgUrl;
+	@Id
+	@Column(name="ID")
+	private int id;
+	private String name;
+	private String description;
+	private double price;
+	@ManyToMany
+	private List<Category> categories;
+	private String imgUrl;
 
 	public Product(int id, String name, String description, String imgUrl, double price, List<Category> categories) {
 		this.id = id;
@@ -18,6 +29,10 @@ public class Product {
 		this.imgUrl = imgUrl;
 		this.price = price;
 		this.categories = categories;	
+	}
+	
+	public Product() {
+		
 	}
 
 	public int getId() {

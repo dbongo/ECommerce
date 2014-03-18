@@ -1,5 +1,7 @@
 package models;
 
+
+//@Entity
 public class ProductEntity {
 
 	private final Product product;

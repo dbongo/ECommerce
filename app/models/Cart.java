@@ -2,8 +2,12 @@ package models;
 
 import java.util.List;
 
-public class Cart {
+import javax.persistence.Id;
 
+//@Entity
+public class Cart {
+	
+	@Id 
 	private final int id;
 	private final User user;
 	private List<ProductEntity> products;
