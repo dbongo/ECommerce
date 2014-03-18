@@ -3,22 +3,20 @@ package controllers;
 import java.util.List;
 
 import models.Category;
-import play.db.jpa.JPA;
-import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.category;
 import views.html.categories;
+import views.html.category;
+
+import com.avaje.ebean.Ebean;
 
 public class Categories extends Controller {
-
-	@Transactional
+	
     public static Result allCategories() {
         return ok(categories.render(getAllCategoriesFromRepo()));
     }
 
-    @Transactional
-    public static Result category(Long id) {
+    public static Result category(String id) {
     	Category cat = getCategoryFromRepo(id);
     	if (cat == null) {
     		return notFound("A category with that id was not found.");
@@ -26,16 +24,14 @@ public class Categories extends Controller {
         return ok(category.render(cat));
     }
     
-    @Transactional
     private static List<Category> getAllCategoriesFromRepo() {
-    	List<Category> allCategories = JPA.em().createQuery("SELECT a FROM Category a", Category.class).getResultList();	
+    	List<Category> allCategories;
+    	allCategories = Ebean.find(Category.class).findList();
     	return allCategories;
     }
     
-    @Transactional
-    private static Category getCategoryFromRepo(Long id) {
-    	Category category = JPA.em().find(Category.class, id);
-    	return category;
+    private static Category getCategoryFromRepo(String id) {
+    	return Ebean.find(Category.class, id);
     }
     	
     

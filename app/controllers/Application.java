@@ -2,51 +2,53 @@ package controllers;
 
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 
 import models.Category;
 import models.Product;
-import play.db.jpa.JPA;
-import play.db.jpa.Transactional;
-import play.mvc.Controller;
-import play.mvc.Result;
-import views.html.startpage;
+
+import com.avaje.ebean.Ebean;
+
+import play.*;
+import play.mvc.*;
+import views.html.*;
 
 public class Application extends Controller {
+
+	private static boolean productsAdded = false;
 	
-	static boolean productsAdded = false;
-	
-	@Transactional
-	public static void createDB() {
+	private static void createDB() {
 		
 		if (!productsAdded) {
-			JPA.em().persist(new Category(1, "Book", "fa-book"));
-			JPA.em().persist(new Category(2, "Movie", "fa-film"));
-			JPA.em().persist(new Category(3, "TV-Show", "fa-desktop"));
-			
-			JPA.em().persist(new Product(1, "Hobbit", "There and back again", "hobbit.jpg", 100, new LinkedList<Category>(Arrays.asList( JPA.em().find(Category.class, 1),  JPA.em().find(Category.class, 2)))));	
-			JPA.em().persist(new Product(2, "The Bro Code", "This book is aaaaawesome!", "bro-code.jpg", 210, new LinkedList<Category>(Arrays.asList( JPA.em().find(Category.class, 1)))));	
-			JPA.em().persist(new Product(3, "Iron Man 3", "Tinman goes wild", "iron-man-3.jpg", 320, new LinkedList<Category>(Arrays.asList( JPA.em().find(Category.class, 2)))));	
-			JPA.em().persist(new Product(4, "Thor 2", "By the power of Zues!", "thor-2.jpg", 430, new LinkedList<Category>(Arrays.asList( JPA.em().find(Category.class, 2)))));
-			JPA.em().persist(new Product(5, "True Blood", "It sucks", "true-blood.jpg", 420, new LinkedList<Category>(Arrays.asList( JPA.em().find(Category.class, 1),  JPA.em().find(Category.class, 3)))));
-			JPA.em().persist(new Product(6, "Doctor Who", "Wibbly wobbly timey wimey", "doctor-who.jpg", 430, new LinkedList<Category>(Arrays.asList( JPA.em().find(Category.class, 3)))));
-			JPA.em().persist(new Product(7, "Game of Thrones", "All men must die!", "song-of-ice-and-fire.jpg", 430, new LinkedList<Category>(Arrays.asList( JPA.em().find(Category.class, 1),  JPA.em().find(Category.class, 3)))));
-			productsAdded = true;
+			Ebean.save(new Category(1, "Book", "fa-book"));
+			Ebean.save(new Category(2, "Movie", "fa-film"));
+			Ebean.save(new Category(3, "TV-Show", "fa-desktop"));
+		
+			Ebean.save(new Product(1, "Hobbit", "There and back again", "hobbit.jpg", 100, new LinkedList<Category>(Arrays.asList(Ebean.find(Category.class, 1), Ebean.find(Category.class, 2)))));	
+			Ebean.save(new Product(2, "The Bro Code", "This book is aaaaawesome!", "bro-code.jpg", 210, new LinkedList<Category>(Arrays.asList(Ebean.find(Category.class, 1)))));	
+			Ebean.save(new Product(3, "Iron Man 3", "Tinman goes wild", "iron-man-3.jpg", 320, new LinkedList<Category>(Arrays.asList(Ebean.find(Category.class, 2)))));	
+			Ebean.save(new Product(4, "Thor 2", "By the power of Zues!", "thor-2.jpg", 430, new LinkedList<Category>(Arrays.asList(Ebean.find(Category.class, 2)))));
+			Ebean.save(new Product(5, "True Blood", "It sucks", "true-blood.jpg", 420, new LinkedList<Category>(Arrays.asList(Ebean.find(Category.class, 1), Ebean.find(Category.class, 3)))));
+			Ebean.save(new Product(6, "Doctor Who", "Wibbly wobbly timey wimey", "doctor-who.jpg", 430, new LinkedList<Category>(Arrays.asList(Ebean.find(Category.class, 3)))));
+			Ebean.save(new Product(7, "Game of Thrones", "All men must die!", "song-of-ice-and-fire.jpg", 430, new LinkedList<Category>(Arrays.asList(Ebean.find(Category.class, 1), Ebean.find(Category.class, 3)))));
+			productsAdded = true;	
 		}
 	}
 	
 	public static Result index() {
-		if (productsAdded) {
-			return ok(startpage.render("<p>Happy browsing!</p>"));
+		if (!productsAdded) {
+			return ok(startpage.render("<p><a href='/setup'>Klick me</a> to add some content to the site!</p>"));	
 		} else {
-			return ok(startpage.render("<p><a href='/setup'>Click me</a> to populate this site with content!</p>"));	
+			return ok(startpage.render("Happy browsing!"));
 		}
 		
 	}
 	
-	@Transactional
 	public static Result setup() {
-		createDB();
-		return redirect("/");	
+		if (!productsAdded) {
+			createDB();
+		}
+		return redirect("/");
+		
+		
 	}
 }

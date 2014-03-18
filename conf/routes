@@ -5,15 +5,13 @@
 # Home page
 GET     /                           controllers.Application.index()
 GET     /products    	            controllers.Products.allProducts()
-GET     /products/:id    	        controllers.Products.product(id:Int)
+GET     /products/:id    	        controllers.Products.product(id)
 GET     /categories                 controllers.Categories.allCategories()
-GET     /categories/:id             controllers.Categories.category(id: Int)
+GET     /categories/:id             controllers.Categories.category(id)
 GET     /checkout                   controllers.Checkout.checkout()
 GET     /cart                       controllers.Cart.cart()
-
-# setup
-GET   /setup		               	controllers.Application.setup()
 
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET 	/setup			            controllers.Application.setup()

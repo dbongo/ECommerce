@@ -5,23 +5,22 @@ import java.util.List;
 
 import models.Category;
 import models.Product;
-import play.db.jpa.JPA;
-import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.product;
 import views.html.products;
 
-public class Products extends Controller {
+import com.avaje.ebean.Ebean;
 
-	@Transactional
+public class Products extends Controller {
+	
+
     public static Result allProducts() {
     	String category  = request().getQueryString("cat");
         return ok(products.render(getAllProductsFromRepo(category)));
     }
 
-	@Transactional
-    public static Result product(int id) {
+    public static Result product(String id) {
     	Product prod = getProductFromRepo(id);
     	if (prod == null) {
     		return notFound("product not found");
@@ -29,9 +28,10 @@ public class Products extends Controller {
         return ok(product.render(prod));
     }
     
-	@Transactional
+
     private static List<Product> getAllProductsFromRepo(String category) {
-    	List<Product> allProducts = JPA.em().createQuery("SELECT a FROM Product a", Product.class).getResultList();
+    	List<Product> allProducts;
+    	allProducts = Ebean.find(Product.class).findList();
     	if (category == null) {
     		return allProducts;
     	}
@@ -45,11 +45,9 @@ public class Products extends Controller {
     	}
     	return filteredProducts;
     }
-	
-	@Transactional    
-    private static Product getProductFromRepo(int id) {
-    	Product product = JPA.em().find(Product.class, id);
-    	return product;
+    
+    private static Product getProductFromRepo(String id) {
+    	return Ebean.find(Product.class, id);
     }
     
 }
