@@ -14,12 +14,12 @@ import views.html.startpage;
 
 public class Application extends Controller {
 	
-	static boolean firstTime = true;
+	static boolean productsAdded = false;
 	
 	@Transactional
 	public static void createDB() {
 		
-		if (firstTime) {
+		if (!productsAdded) {
 			JPA.em().persist(new Category(1, "Book", "fa-book"));
 			JPA.em().persist(new Category(2, "Movie", "fa-film"));
 			JPA.em().persist(new Category(3, "TV-Show", "fa-desktop"));
@@ -31,17 +31,22 @@ public class Application extends Controller {
 			JPA.em().persist(new Product(5, "True Blood", "It sucks", "true-blood.jpg", 420, new LinkedList<Category>(Arrays.asList( JPA.em().find(Category.class, 1),  JPA.em().find(Category.class, 3)))));
 			JPA.em().persist(new Product(6, "Doctor Who", "Wibbly wobbly timey wimey", "doctor-who.jpg", 430, new LinkedList<Category>(Arrays.asList( JPA.em().find(Category.class, 3)))));
 			JPA.em().persist(new Product(7, "Game of Thrones", "All men must die!", "song-of-ice-and-fire.jpg", 430, new LinkedList<Category>(Arrays.asList( JPA.em().find(Category.class, 1),  JPA.em().find(Category.class, 3)))));
-			firstTime = false;
+			productsAdded = true;
 		}
 	}
 	
 	public static Result index() {
-		return ok(startpage.render("Your new application is ready."));
+		if (productsAdded) {
+			return ok(startpage.render("<p>Happy browsing!</p>"));
+		} else {
+			return ok(startpage.render("<p><a href='/setup'>Click me</a> to populate this site with content!</p>"));	
+		}
+		
 	}
 	
 	@Transactional
 	public static Result setup() {
 		createDB();
-		return redirect("/");
+		return redirect("/");	
 	}
 }
