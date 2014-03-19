@@ -12,7 +12,7 @@ GET     /checkout                   controllers.CheckoutController.checkout()
 GET     /cart                       controllers.CartController.cart()
 
 # setup
-GET   /setup		               	controllers.Application.setup()
+#GET   /setup		               	controllers.Application.setup()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
