@@ -12,7 +12,7 @@ import play.mvc.Result;
 import views.html.product;
 import views.html.products;
 
-public class Products extends Controller {
+public class ProductController extends Controller {
 
 	@Transactional
     public static Result allProducts() {

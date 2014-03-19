@@ -10,7 +10,7 @@ import play.mvc.Result;
 import views.html.category;
 import views.html.categories;
 
-public class Categories extends Controller {
+public class CategoryController extends Controller {
 
 	@Transactional
     public static Result allCategories() {

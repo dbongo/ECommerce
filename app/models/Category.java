@@ -2,19 +2,20 @@ package models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Category {
 	
 	@Id
+	@GeneratedValue
 	@Column(name="ID")
 	private int id;
 	private String name;
 	private String icon;
 	
-	public Category(int id, String name, String icon) {
-		this.id = id;
+	public Category(String name, String icon) {
 		this.name = name;
 		this.icon = icon;	
 	}

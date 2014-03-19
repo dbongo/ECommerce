@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -13,6 +14,7 @@ import javax.persistence.ManyToMany;
 public class Product {
 
 	@Id
+	@GeneratedValue
 	@Column(name="ID")
 	private int id;
 	private String name;
@@ -22,8 +24,7 @@ public class Product {
 	private List<Category> categories;
 	private String imgUrl;
 
-	public Product(int id, String name, String description, String imgUrl, double price, List<Category> categories) {
-		this.id = id;
+	public Product(String name, String description, String imgUrl, double price, List<Category> categories) {
 		this.name = name;
 		this.description = description;
 		this.imgUrl = imgUrl;
