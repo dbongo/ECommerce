@@ -9,11 +9,9 @@
 	@for(product <- products) {
 		<a href="/products/@product.getId()">
 			<dic class="col-sm-3 product-thumbnail">
-				<img src="assets/images/@product.getImgUrl()" alt="@product.getName()" class="img-rounded">
+				<img src="assets/images/@if(product.getImgUrl() == null){no-image.jpg} else {@product.getImgUrl()}" alt="@product.getName()" class="img-rounded">
 				<h4>@product.getName()</h4>
 			</dic>
 		</a>
 	}
-	
-
 }

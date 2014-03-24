@@ -1,0 +1,51 @@
+@* productForm Template File *@
+@(categories: List[Category])
+@index("New Product") {
+	<div class="container col-sm-12">
+		<h2>New Product</h2>
+		<hr>
+		</div>
+		<form action="@routes.ProductController.newProduct()" role="form" method="post" class="form-horizontal" >
+			
+	  			<div class="form-group">
+	    			<label for="name" class="col-sm-2 control-label">Product name</label>
+	    			<div class="col-sm-8">
+	    				<input type="text" class="form-control" id="name" name="name" placeholder="Name">
+	    			</div>
+	  			</div>
+	  			<div class="form-group">
+	    			<label for="description" class="col-sm-2 control-label">Description</label>
+	    			<div class="col-sm-8">
+	    				<textarea class="form-control" rows="3" name="description" id="description" placeholder="Description..."></textarea>
+	    			</div>
+	  			</div>
+	  			<div class="form-group">
+	    			<label for="img-name" class="col-sm-2 control-label">Image name</label>
+	    			<div class="col-sm-8">
+	    				<input type="text" class="form-control" id="img-name" name="img-name" placeholder="Image">
+	    			</div>
+	  			</div>
+	  			<div class="form-group">
+	    			<label for="price" class="col-sm-2 control-label">Price</label>
+	    			<div class="col-sm-8">
+	    				<input type="number" class="form-control" id="price" name="price" placeholder="0">
+	    			</div>
+	  			</div>
+	  			<div class="form-group">
+	  				<label for="categories" class="col-sm-2 control-label">Categories</label>
+	  				<div class="col-sm-8">
+		  				<select multiple class="form-control" name="categories">
+		  					@for(category <- categories) {
+		  						<option value="@category.getId()"> @category.getName()</option>
+		  					}
+		  				</select>
+		  			</div>
+	  			</div>
+	  			<div class="form-group">
+		  			<div class="col-sm-offset-2 col-sm-8">
+		  				<button type="submit" class="btn btn-default "><i class="fa fa-save"></i> Save</button>
+		  			</div>
+	  			</div>
+  			
+  		</form>
+}

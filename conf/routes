@@ -6,10 +6,18 @@
 GET     /                           controllers.Application.index()
 GET     /products    	            controllers.ProductController.allProducts()
 GET     /products/:id    	        controllers.ProductController.product(id:Int)
+POST    /products    	            controllers.ProductController.newProduct()
+
 GET     /categories                 controllers.CategoryController.allCategories()
 GET     /categories/:id             controllers.CategoryController.category(id: Int)
+POST    /categories                 controllers.CategoryController.newCategory()
+
 GET     /checkout                   controllers.CheckoutController.checkout()
 GET     /cart                       controllers.CartController.cart()
+
+GET     /admin                       controllers.AdminController.start()
+GET     /admin/product-form                       controllers.AdminController.productForm()
+GET     /admin/category-form                       controllers.AdminController.categoryForm()
 
 # setup
 #GET   /setup		               	controllers.Application.setup()

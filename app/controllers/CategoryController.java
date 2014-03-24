@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import models.Category;
 import play.db.jpa.JPA;
@@ -27,8 +28,22 @@ public class CategoryController extends Controller {
     }
     
     @Transactional
+    public static Result newCategory() {
+    	Map <String, String[]> form = request().body().asFormUrlEncoded();
+    	
+    	String name = form.get("name")[0];
+    	String icon = "fa-" + form.get("icon")[0];
+    	
+    	Category category = new Category(name, icon);
+    	
+    	JPA.em().persist(category);
+    	
+    	return redirect("/categories");
+    }
+    
+    @Transactional
     private static List<Category> getAllCategoriesFromRepo() {
-    	List<Category> allCategories = JPA.em().createQuery("SELECT a FROM Category a", Category.class).getResultList();	
+    	List<Category> allCategories = JPA.em().createQuery("SELECT a FROM Category a", Category.class).getResultList();
     	return allCategories;
     }
     

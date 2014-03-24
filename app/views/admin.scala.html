@@ -1,0 +1,10 @@
+@* admin Template File *@
+@(test: String)
+@index("Admin") {
+	<div class="container">
+		<h2>Admin</h2>
+		<hr>
+		<h4><a href="@routes.AdminController.productForm()">New Product</a></h4>
+		<h4><a href="@routes.AdminController.categoryForm()">New Category</a></h4>
+	</div>
+}
