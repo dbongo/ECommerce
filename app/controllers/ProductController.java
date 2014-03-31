@@ -12,15 +12,16 @@ import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.product;
-import views.html.products;
+import views.html.*;
 
 public class ProductController extends Controller {
 
 	@Transactional
     public static Result allProducts() {
     	String category  = request().getQueryString("cat");
-        return ok(products.render(getAllProductsFromRepo(category)));
+    	List<Product> prods = getAllProductsFromRepo(category);
+    	String title = category == null ? "Products" : category; 
+    	return ok(products.render(title, prods, UserController.getCurrentUser()));
     }
 
 	@Transactional
@@ -29,7 +30,7 @@ public class ProductController extends Controller {
     	if (prod == null) {
     		return notFound("product not found");
     	}
-        return ok(product.render(prod));
+        return ok(product.render(prod, UserController.getCurrentUser()));
     }
     
 	@Transactional
@@ -56,6 +57,12 @@ public class ProductController extends Controller {
 		JPA.em().persist(product);
 		
 		return redirect(routes.ProductController.allProducts());
+	}
+	
+
+	@Transactional
+    private static List<Product> getAllProductsFromRepo() {
+		return getAllProductsFromRepo(null);
 	}
 	
 	@Transactional

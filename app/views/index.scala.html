@@ -1,4 +1,4 @@
-@(title: String)(content: Html)
+@(title: String, user: User)(content: Html)
 <!DOCTYPE html>
 <html><head>
 	<meta charset="utf-8">
@@ -9,6 +9,15 @@
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </head><body>
+<header>
+
+@if(session.get("username") == null) {
+	@menuBarLoggedOut()
+} else {
+	@menuBarLoggedIn(user)
+}
+
+</header>
 	<div class="jumbotron">
 		<div class="container">
 			<h1>This is my awesome webshop!</h1>
@@ -27,11 +36,14 @@
 					<a href="/categories">Categories</a>
 				</li>
 			</ul>
-			<ul>
-				<li>
-					<a href="/admin">Admin stuff</a>
-				</li>
-			</ul>
+			@if(user != null && user.getStatus() == UserStatus.ADMIN) {
+				<ul>
+					<li>
+						<a href="/admin">Admin stuff</a>
+					</li>
+				</ul>
+			}
+			
 		</div>
 		<div class="col-sm-10">
 			@content

@@ -34,9 +34,14 @@ public class Application extends Controller {
 //		}
 //	}
 	
+	@Transactional
 	public static Result index() {
 //		if (productsAdded) {
-			return ok(startpage.render("<p>Happy browsing!</p>"));
+//			if (request().getQueryString("login").equals("failed")) {
+//				return ok(startpage.render(arg0))
+//			}
+		
+			return ok(startpage.render("<p>Happy browsing!</p>", UserController.getCurrentUser()));
 //		} else {
 //			return ok(startpage.render("<p><a href='/setup'>Click me</a> to populate this site with content!</p>"));	
 //		}

@@ -15,7 +15,7 @@ public class CategoryController extends Controller {
 
 	@Transactional
     public static Result allCategories() {
-        return ok(categories.render(getAllCategoriesFromRepo()));
+        return ok(categories.render(getAllCategoriesFromRepo(), UserController.getCurrentUser()));
     }
 
     @Transactional

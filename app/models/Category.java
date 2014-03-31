@@ -9,8 +9,8 @@ import javax.persistence.Id;
 public class Category {
 	
 	@Id
-	@Column(name="ID")
 	@GeneratedValue
+	@Column(name="ID")
 	private int id;
 	private String name;
 	private String icon;

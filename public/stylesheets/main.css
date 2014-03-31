@@ -38,3 +38,70 @@ td {
 .product-thumbnail img {
 	width: 100%;
 }
+
+.navbar {
+	margin-bottom:0;
+}
+
+.category-thumb {
+	text-align:center;
+}
+.navbar-text {
+	margin-right:15px;
+}
+
+.image-cropper {
+	overflow:hidden;
+	height: 198px;		
+}
+
+@media screen and (max-width: 766px) {
+	.navbar-text {
+		text-align:right;
+		padding-right: 83px;
+	}
+	.image-cropper {
+		height: 198px;		
+	}
+}
+@media screen and (min-width: 767px) {
+	.navbar-header:not(.not-logged-in) {
+		width: 90%;
+	}
+	.image-cropper {
+		height: 110px;
+	}
+	
+}
+@media screen and (min-width: 992px) { 
+	.image-cropper {
+		height: 156px;
+	}
+}
+@media screen and (min-width: 1200px) { 
+	.image-cropper {
+		height: 198px;
+	}
+}
+.navbar-toggle {
+	background-color:white;
+	height: 34px;
+	padding: 6px 12px;
+}
+
+.left-inner-addon {
+  		position: relative;
+}
+.left-inner-addon input {
+   	padding-left: 29px;    
+}
+.left-inner-addon span {
+   	position: absolute;
+   	padding: 7px 12px;
+   	pointer-events: none;
+}
+
+.product-thumbnail h4 {
+	max-height: 19px;
+	overflow:hiddent;
+}

@@ -1,6 +1,6 @@
-@(product: models.Product)
+@(product: models.Product, user: User)
 
-@index(product.getName()) {
+@index(product.getName(), user) {
 	<div class="container fluid">
 		<h2>@product.getName()</h2>
 		<hr>

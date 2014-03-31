@@ -1,10 +1,16 @@
 @* startpage Template File *@
-@(populate: String)
+@(populate: String, user: User)
 
-@index("Webshop"){
+@index("Webshop", user){
 	<div class="container-fluid">
 		<h2>Welcome to my humble webshop</h2>
 		<p>Here you will find some books and movies.</p>
+		<p>
+			Login information for testing:<br>
+			<b>ADMIN</b> username: <b>admin@@test.com</b>, password: <b>qwe123</b><br>
+			<b>CUSTOMER</b> username: <b>user@@test.com</b>, password: <b>qwe123</b><br>
+			You can also register your own customer via the New user link at the top of the page or click <a href="/register">here</a>.
+		</p>
 		@Html(populate)
 	</div>
 }

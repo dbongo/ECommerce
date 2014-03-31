@@ -19,6 +19,13 @@ GET     /admin                       controllers.AdminController.start()
 GET     /admin/product-form                       controllers.AdminController.productForm()
 GET     /admin/category-form                       controllers.AdminController.categoryForm()
 
+POST    /login                    controllers.AuthenticationController.login()
+GET     /logout                    controllers.AuthenticationController.logout()
+
+GET 	/register					controllers.UserController.userForm()
+POST    /user                    controllers.UserController.newUser()
+
+
 # setup
 #GET   /setup		               	controllers.Application.setup()
 

@@ -1,15 +1,17 @@
 @* products Template File *@
-@(products: List[models.Product])
-@index("Products") {
+@(title: String, products: List[models.Product], user: User)
+@index(title, user) {
 	<div class="container-fluid">
-	<h2>Products</h2>
+	<h2>@title</h2>
 	<hr>
 	</div>
 	
 	@for(product <- products) {
 		<a href="/products/@product.getId()">
 			<dic class="col-sm-3 product-thumbnail">
-				<img src="assets/images/@if(product.getImgUrl() == null){no-image.jpg} else {@product.getImgUrl()}" alt="@product.getName()" class="img-rounded">
+				<div class="image-cropper img-rounded">
+					<img src="@if(product.getImgUrl() == null){/assets/no-image.jpg} else {@product.getImgUrl()}" alt="@product.getName()" class="img-rounded product-thumb-image">
+				</div>
 				<h4>@product.getName()</h4>
 			</dic>
 		</a>

@@ -1,13 +1,13 @@
 @* categories Template File *@
-@(categories: List[models.Category])
-@index("Categories") {
+@(categories: List[models.Category], user: User)
+@index("Categories", user) {
 	<div class="container-fluid">
 		<h2>Categories</h2>
 		<hr>
 	</div>
 	@for(category <- categories) {
 		<a href="/products?cat=@category.getName()">
-			<div class="col-sm-3">
+			<div class="col-xs-3 category-thumb">
 				<i class="fa @category.getIcon() fa-5x"></i>
 				<br>
 				<h4>@category.getName()</h4>
