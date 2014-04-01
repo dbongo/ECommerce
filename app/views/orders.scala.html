@@ -1,0 +1,37 @@
+@* orders Template File *@
+@(user: User)
+@index("Orders", user) {
+	<div class="container-fluid">
+		<h2>Orders</h2>
+		<hr>
+	</div>	
+	<div class="container-fluid">
+		@for(order <- user.getReversedOrdersCopy()) {
+			<h3>@order.getDateMap().get("year")-@order.getDateMap().get("month")-@order.getDateMap().get("day") @order.getDateMap().get("hour"):@order.getDateMap().get("minute")</h3>
+			<table class="table order-table">
+				<thead>
+					<tr>
+						<th class="col-md-6">Product</th>
+						<th>Quantity</th>
+						<th>Price</th>
+					</tr>
+				</thead>
+				<tbody>
+					@for(opq <- order.getOpqs()) {
+						<tr>
+							<td><img class="img-rounded" src="@opq.getProduct().getImgUrl()"> @opq.getProduct().getName()</td>
+							<td>@opq.getQuantity()</td>
+							<td>@opq.getPricePerUnit()</td>
+						</tr>	
+					}
+					<tr class="total-row">
+						<td>TOTAL</td>
+						<td>@order.getTotalQuantity()</td>
+						<td>@order.getTotalPrice()</td>
+					</tr>
+				</tbody>
+			</table>
+			<hr>	
+		}
+	</div>
+}
