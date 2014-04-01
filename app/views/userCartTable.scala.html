@@ -1,0 +1,43 @@
+@* cartTable Template File *@
+@(user: User)
+		<table class="table table-hover cart-table">
+			<thead>
+				<tr>
+					<th class="col-md-6">Product</th>
+					<th class="col-md-3">Quantity</th>
+					<th>Price</th>
+					<th class="trash-product-from-cart-column"></th>
+				</tr>
+			</thead>
+			<tbody>
+			@for(cpq <- user.getCart()) {
+				<tr>
+					<td>
+					  <a href="@routes.ProductController.product(cpq.getProduct().getId())"><img src="@cpq.getProduct().getImgUrl()" class="img-rounded"></a> <a href="@routes.ProductController.product(cpq.getProduct().getId())"><span>@cpq.getProduct().getName()</span></a>
+					</td>
+					<td>
+						<span>@cpq.getQuantity()</span>
+					</td>
+					<td>
+						@("%.2f".format(cpq.getProduct().getPrice())):-
+					</td>
+					<td>
+						<a href="@routes.CartController.removeProduct(cpq.getProduct().getId())"><i class="fa fa-trash-o"></i>
+					</td>
+				</tr>	
+			}
+				<tr>
+					<td>
+						TOTAL
+					</td>
+					<td>
+						@user.getNumberOfItemsInCart()
+					</td>
+					<td>
+						@("%.2f".format(user.getTotalPriceOfCart())):-
+					</td>
+					<td>
+					</td>
+				</tr>
+			</tbody>
+		</table>

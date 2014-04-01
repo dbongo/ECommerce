@@ -1,0 +1,7 @@
+@* testpage Template File *@
+@(user: User)
+Username: @user.getEmail();
+CPQ: @user.getCart().size();
+@for(cpq <- user.getCart()) {
+	@cpq.getProduct().getName(), @cpq.getQuantity() <br>
+}

@@ -1,0 +1,13 @@
+@(title: String, user: User)
+@index(title, user) {
+	<div class="container-fluid">
+		<h2>Cart</h2>
+		<hr>
+	</div>
+	<div class="container-fluid">
+		@anonymousCartTable()
+		<form action="@routes.CheckoutController.checkout" method="post" role="form" class="pull-right">
+			<button type="submit" class="btn btn-success btn-lg">Place order</button>
+		</form>
+	</div>
+}

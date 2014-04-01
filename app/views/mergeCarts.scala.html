@@ -1,0 +1,26 @@
+@* mergeCarts Template File *@
+@(user: User)
+
+@index("Merge carts", user){
+<div class="container-fluid">
+	<h2>Opps!</h2>
+	<hr>
+	<p>You have an old cart saved to this account. plece choose an anction.</p>
+	
+	<h3>New cart</h3>
+	
+	@anonymousCartTable()
+	
+	<hr>
+	
+	<h3>Old cart</h3>
+	
+	@userCartTable(user)
+	
+	<button id="keep-old-cart-button" type="button" class="btn btn-default">Keep old cart</button>
+	<button id="keep-new-cart-button" type="button" class="btn btn-primary">Keep new cart</button>
+	<button id="merge-carts-button" type="button" class="btn btn-success">Merge the carts</button>
+	
+</div>	
+<script src="/assets/javascripts/offlineCart.js"></script>
+}
