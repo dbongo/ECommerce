@@ -23,3 +23,7 @@ INSERT INTO `User` (`email`,`firstname`,`password`,`status`,`surname`) VALUES ('
 INSERT INTO `CartProductQuantity` (`ID`,`quantity`,`product_ID`,`user_ID`) VALUES (1,1,1,1);
 INSERT INTO `CartProductQuantity` (`ID`,`quantity`,`product_ID`,`user_ID`) VALUES (2,2,3,1);
 INSERT INTO `CartProductQuantity` (`ID`,`quantity`,`product_ID`,`user_ID`) VALUES (3,5,6,1);
+INSERT INTO `ECOrder` (`ID`,`date`,`user_ID`) VALUES (1,'2014-04-01 13:37:38',1);
+INSERT INTO `OrderProductQuantity` (`ID`,`pricePerUnit`,`quantity`,`ecOrder_ID`,`product_ID`,`user_ID`) VALUES (1,430,1,1,4,1);
+INSERT INTO `OrderProductQuantity` (`ID`,`pricePerUnit`,`quantity`,`ecOrder_ID`,`product_ID`,`user_ID`) VALUES (2,420,1,1,5,1);
+INSERT INTO `OrderProductQuantity` (`ID`,`pricePerUnit`,`quantity`,`ecOrder_ID`,`product_ID`,`user_ID`) VALUES (3,430,2,1,7,1);

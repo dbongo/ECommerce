@@ -8,14 +8,25 @@
 	<link href="/assets/stylesheets/main.css" rel="stylesheet">
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<script src="/assets/javascripts/main.js"></script>
 </head><body>
 <header>
 
-@if(session.get("username") == null) {
-	@menuBarLoggedOut()
-} else {
+@if(session.containsKey("username")) {
 	@menuBarLoggedIn(user)
+} else {
+	@menuBarLoggedOut()
 }
+@if(flash().containsKey("icncorrect-information")) {
+	<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>There was an error with your E-Mail/Password combination. Please try again.</div>
+} 
+@if(flash().containsKey("product-added")) {
+	<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> Product added to your cart</div>
+} 
+@if(flash().containsKey("order-placed")) {
+	<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> Order placed! Thank You!</div>
+} 
+
 
 </header>
 	<div class="jumbotron">
@@ -36,6 +47,13 @@
 					<a href="/categories">Categories</a>
 				</li>
 			</ul>
+			@if(user != null && user.getStatus() == UserStatus.CUSTOMER) {
+				<ul>
+					<li>
+						<a href="/orders">My Orders</a>
+					</li>
+				</ul>
+			}
 			@if(user != null && user.getStatus() == UserStatus.ADMIN) {
 				<ul>
 					<li>

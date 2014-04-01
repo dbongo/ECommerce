@@ -18,7 +18,8 @@ public class CheckoutController extends Controller {
 	    	User user = UserController.getCurrentUser();
 	    	user.placeOrder();
 	    	JPA.em().persist(user);
-	        return ok(checkout.render("Check out or new checkout!"));
+	    	flash().put("order-placed", "yes");
+	        return redirect("/orders");
 		} else {
 			return redirect("/register");
 		}

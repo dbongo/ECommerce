@@ -8,6 +8,7 @@ import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import views.html.category;
 import views.html.categories;
 
@@ -28,6 +29,7 @@ public class CategoryController extends Controller {
     }
     
     @Transactional
+    @Security.Authenticated(MyAdminAuthenticator.class)
     public static Result newCategory() {
     	Map <String, String[]> form = request().body().asFormUrlEncoded();
     	

@@ -1,8 +1,12 @@
 package models;
 
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -54,6 +58,34 @@ public class ECOrder {
 
 	public List<OrderProductQuantity> getOpqs() {
 		return opqs;
+	}
+
+	public double getTotalPrice() {
+		double totalPrice = 0;
+		for (OrderProductQuantity opq : opqs) {
+			totalPrice += opq.getPricePerUnit() * opq.getQuantity();
+		}
+		return totalPrice;
+	}
+	
+	public int getTotalQuantity() {
+		int totalQuantity = 0;
+		for (OrderProductQuantity opq : opqs) {
+			totalQuantity += opq.getQuantity();
+		}
+		return totalQuantity;
+	}
+	
+	public Map<String, String> getDateMap() {
+		Map<String, String> dateMap = new HashMap<>();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		dateMap.put("year", "" + calendar.get(Calendar.YEAR));
+		dateMap.put("month", String.format("%02d", (calendar.get(Calendar.MONTH) + 1)));
+		dateMap.put("day", String.format("%02d", calendar.get(Calendar.DAY_OF_MONTH)));
+		dateMap.put("hour", String.format("%02d", calendar.get(Calendar.HOUR_OF_DAY)));
+		dateMap.put("minute", String.format("%02d", calendar.get(Calendar.MINUTE)));
+		return dateMap;
 	}
 	
 }

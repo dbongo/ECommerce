@@ -14,20 +14,20 @@ import play.mvc.Security;
 public class AdminController extends Controller { 
 	
 	@Transactional
-	@Security.Authenticated
+	@Security.Authenticated(MyAdminAuthenticator.class)
 	public static Result start() {
 		return ok(admin.render("", UserController.getCurrentUser()));
 	}
 	
 	@Transactional
-	@Security.Authenticated
+	@Security.Authenticated(MyAdminAuthenticator.class)
 	public static Result productForm() {
 		List<Category> categories =  JPA.em().createQuery("SELECT c FROM Category c", Category.class).getResultList();
 		return ok(productForm.render(categories, UserController.getCurrentUser()));
 	}
 	
 	@Transactional
-	@Security.Authenticated
+	@Security.Authenticated(MyAdminAuthenticator.class)
 	public static Result categoryForm() {
 		return ok(categoryForm.render(UserController.getCurrentUser()));
 	}

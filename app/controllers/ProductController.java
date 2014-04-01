@@ -15,6 +15,7 @@ import play.db.jpa.Transactional;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import views.html.*;
 
 public class ProductController extends Controller {
@@ -52,6 +53,7 @@ public class ProductController extends Controller {
 	}
 	
 	@Transactional
+	@Security.Authenticated(MyAdminAuthenticator.class)
 	public static Result newProduct() {
 		Map<String, String[]> form = request().body().asFormUrlEncoded();
 		

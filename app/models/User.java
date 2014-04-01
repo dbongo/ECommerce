@@ -1,5 +1,6 @@
 package models;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -67,6 +68,14 @@ public class User {
 	public List<ECOrder> getOrders() {
 		return orders;
 	}
+	
+	
+	public List<ECOrder> getReversedOrdersCopy() {
+		List<ECOrder> ordersReverseCoppy = new LinkedList<>(orders);
+		Collections.reverse(ordersReverseCoppy);
+		return ordersReverseCoppy;
+	}
+	
 	
 	public List<CartProductQuantity> getCart() {
 		return cart;

@@ -22,6 +22,7 @@ public class CartController extends Controller {
     }
 	
 	@Transactional
+	@Security.Authenticated(MyAuthenticator.class)
 	public static Result clearCart() {
 		if (session().containsKey("username")) {
 			User user = UserController.getCurrentUser();
@@ -33,6 +34,7 @@ public class CartController extends Controller {
 	}
 
 	@Transactional
+	@Security.Authenticated(MyAuthenticator.class)
 	public static Result mergeCart() {
 		if (session().containsKey("username")) {
 			return ok(mergeCarts.render(UserController.getCurrentUser()));
@@ -41,7 +43,7 @@ public class CartController extends Controller {
 	}
 	
 	@Transactional
-	@Security.Authenticated
+	@Security.Authenticated(MyAuthenticator.class)
 	public static Result addProductToCart() {
 		User user = UserController.getCurrentUser();
 		Map<String, String[]> form = request().body().asFormUrlEncoded();
@@ -55,12 +57,13 @@ public class CartController extends Controller {
 		}
 		user.addProductQuantity(product, quantity);
 		JPA.em().persist(user);
+		flash().put("product-added", "yes");
 		String previousUrl = request().getHeader("referer");
 		return redirect(previousUrl);
 	}
 	
 	@Transactional
-	@Security.Authenticated
+	@Security.Authenticated(MyAuthenticator.class)
 	public static Result removeProduct(int id) {
 		Product product = JPA.em().find(Product.class, id);
 		if (product == null) {
