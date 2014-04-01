@@ -1,5 +1,6 @@
 package models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,7 +16,7 @@ public class CartProductQuantity {
 	@GeneratedValue
 	@Column(name="ID")
 	int id;
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST})
 	private User user;
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Product product;
@@ -25,8 +26,9 @@ public class CartProductQuantity {
 		
 	}
 	
-	public CartProductQuantity(Product product, int quantity) {
+	public CartProductQuantity(Product product, int quantity, User user) {
 		this.product = product;
+		this.user = user;
 		this.setQuantity(quantity);
 	}
 

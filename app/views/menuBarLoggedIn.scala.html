@@ -4,14 +4,27 @@
 <div class="navbar navbar-default" role="navigation">
 	<div class="container">
       <div class="navbar-header navbar">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" onClick="location.href='/logout'">Logout</button>
-      <a class="navbar-brand" href="#">The awesome one!</a>
-      <p class="navbar-text navbar-right">Welcome @session().get("username")!</p>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" onClick="location.href='/logout'">
+       	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">The awesome one!</a>
     </div>
 		<div class="navbar-collapse collapse" id="nav-bar">
 			<ul class="nav navbar-nav navbar-right">
+				<li id="cart-dropdown-trigger"><a href="/cart" class="navbar-text"><p>@user.getNumberOfItemsInCart() items <i class="fa fa-shopping-cart fa-lg"></i></p></a>
+					<div class="cart-dropdown-menu">
+						@userCartTable(user)
+					</div>
+          		</li>
+				<li><p class="navbar-text">Welcome @session().get("username")!</p></li>
 	        	<li><button type="submit" class="btn btn-default navbar-btn navbar-right" onclick="location.href='/logout'">Logout</button></li>
 	        </ul>
 		</div>
 	</div>
 </div>
+@if(flash().containsKey("upload-local-cart")) {
+	<script src="/assets/javascripts/upploadOfflineCart.js"></script>	
+}

@@ -31,7 +31,8 @@ public class AuthenticationController extends Controller {
 		
 		if (usernameIsEmpty || passwordIsEmpty) {
 			flash().put("fields-missing", "yes");
-			return redirect("/");
+			String previousUrl = request().getHeader("referer");
+			return redirect(previousUrl);
 		}
 		
 		TypedQuery<User> query = JPA.em().createQuery("SELECT u FROM User u WHERE email = :username AND password = :password", User.class);
@@ -45,12 +46,24 @@ public class AuthenticationController extends Controller {
 		
 		session().put("username", username);
 		
-		return redirect("/");
+		if (form.get("local-cart") != null && form.get("local-cart")[0].equals("yes")) {
+			if (UserController.getCurrentUser().getCart().size() > 0) {				
+				return redirect("/cart/merge");
+			} else {
+				flash().put("upload-local-cart", "yes");
+				String previousUrl = request().getHeader("referer");
+				return redirect(previousUrl);
+			}
+		}
+		
+		String previousUrl = request().getHeader("referer");
+		return redirect(previousUrl);
 	}
 	
 	public static Result logout() {
 		session().clear();
-		return redirect("/");
+		String previousUrl = request().getHeader("referer");
+		return redirect(previousUrl);
 	}
 	
 }

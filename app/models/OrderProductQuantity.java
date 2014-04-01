@@ -28,13 +28,15 @@ public class OrderProductQuantity {
 		
 	}
 	
-	public OrderProductQuantity(CartProductQuantity cpq) {
-		this(cpq.getProduct(), cpq.getQuantity());
+	public OrderProductQuantity(CartProductQuantity cpq, ECOrder order) {
+		this(cpq.getProduct(), cpq.getQuantity(), order, order.getUser());
 	}
 	
-	public OrderProductQuantity(Product product, int quantity) {
+	public OrderProductQuantity(Product product, int quantity, ECOrder order, User user) {
 		this.product = product;
 		this.quantity = quantity;
+		this.ecOrder = order;
+		this.user = user;
 		this.pricePerUnit = product.getPrice();
 	}
 

@@ -6,10 +6,13 @@ import java.util.Map;
 
 import javax.persistence.TypedQuery;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import models.Category;
 import models.Product;
 import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.*;
@@ -33,6 +36,21 @@ public class ProductController extends Controller {
         return ok(product.render(prod, UserController.getCurrentUser()));
     }
     
+	@Transactional
+	public static Result rawProduct(int id) {
+		Product product = JPA.em().find(Product.class, id);
+		if (product == null) {
+			return notFound();
+		}
+		ObjectNode result = Json.newObject();
+		result.put("name", product.getName());
+		result.put("image", product.getImgUrl());
+		result.put("id", product.getId());
+		result.put("price", product.getPrice());
+		
+		return ok(result);
+	}
+	
 	@Transactional
 	public static Result newProduct() {
 		Map<String, String[]> form = request().body().asFormUrlEncoded();

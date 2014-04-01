@@ -1,3 +1,13 @@
-@* cart Template File *@
-@(param: Any)
-@param
+@(title: String, user: User)
+@index(title, user) {
+	<div class="container-fluid">
+		<h2>Cart</h2>
+		<hr>
+	</div>
+	<div class="container-fluid">
+		@userCartTable(user)
+		<form action="@routes.CheckoutController.checkout" method="post" role="form" class="pull-right">
+			<button formaction="@routes.CheckoutController.checkout()" type="submit" class="btn btn-success btn-lg">Place order</button>
+		</form>
+	</div>
+}

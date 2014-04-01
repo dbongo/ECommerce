@@ -6,18 +6,20 @@ import java.util.Map;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import models.Product;
 import models.User;
 import models.UserStatus;
 import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
+import play.mvc.Security;
 import views.html.*;
 import play.mvc.Result;
 
 
 
 public class UserController extends Controller {
-	
+		
 	@Transactional
 	public static User getCurrentUser() {
 		String username = session().get("username");

@@ -1,39 +1,42 @@
 @(product: models.Product, user: User)
 
 @index(product.getName(), user) {
-	<div class="container fluid">
+	<div class="container-fluid">
 		<h2>@product.getName()</h2>
 		<hr>
-		<table>
-			<tbody>
-				<tr>
-					<td>
-						<b>Description:</b>
-					</td>
-					<td>
-						@product.getDescription()
-					</td>
-				</tr>
-				<tr>
-					<td>
-						 <b>Price</b>
-					</td>
-					<td>
-						 @product.getPrice()
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<b>Categories:</b>
-					</td>
-					<td>
-						@for(category <- product.getCategories()) {
-							<a href="/products?cat=@category.getName()">@category.getName()</a>
-							<br>
-						}
-					</td>
-				</tr>
-			</tbody>
-		</table>
 	</div>
+	<div class="col-md-12 category-line container-fluid">
+		<p>
+			@for( (category, index) <- product.getCategories().zipWithIndex) {
+				<a href="/products?cat=@category.getName()">@category.getName()</a>@if(index < product.getCategories().size() - 1) {, }
+			}
+		</p>
+	</div>
+	<div class="col-md-5">
+		<img src="@product.getImgUrl()" class="img-rounded img-responsive"/>
+	</div>
+	<div class="col-md-6 buy-container">
+		<h3 class="pricetag">@if(product.getPrice() % 1 != 0) {@("%.2f".format(product.getPrice()))} else {@("%.0f".format(product.getPrice()))} kr</h3>
+		<br>
+		<div class="col-md-12">
+			<div class="centralizer">
+				<form id="add-to-cart-form" role="form"  action="@routes.CartController.addProductToCart()" method="post">
+	  				<div class="form-group">
+	  				<input id="product-id-input" type="hidden" name="product" value="@product.getId()"/>
+						<select name="quantity" class="form-control product-quantity-select">
+							@for(a <- 1 to 10) {
+								<option value="@a">@a</option>
+							}
+						</select>
+						<button type="submit"  class="btn btn-success btn-lg add-to-cart-button">Add to cart</button>
+					</div>
+				</form>
+			</div>
+			<hr>
+			<p>
+				@product.getDescription()
+			</p>
+		</div>
+	</div>
+		
 }
