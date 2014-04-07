@@ -22,7 +22,7 @@
 						@("%.2f".format(cpq.getProduct().getPrice())):-
 					</td>
 					<td>
-						<a href="@routes.CartController.removeProduct(cpq.getProduct().getId())"><i class="fa fa-trash-o"></i>
+						<span class="trash-product" id="@cpq.getProduct().getId()"><i class="fa fa-trash-o"></i></span>
 					</td>
 				</tr>	
 			}
@@ -41,3 +41,4 @@
 				</tr>
 			</tbody>
 		</table>
+		<script src="/assets/javascripts/onlineCart.js"></script>

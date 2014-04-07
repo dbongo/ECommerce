@@ -21,7 +21,7 @@ public class Application extends Controller {
 	}
 	
 	@Transactional
-	public static Result fourOFour(String requestedUri) {
+	public static Result fourOFour(String requestedUri) {;
 		return notFound(fourOFour.render(request().path(), UserController.getCurrentUser()));
 	}
 }

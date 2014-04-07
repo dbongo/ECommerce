@@ -20,7 +20,6 @@ $(function(){
 	
 	function getProductsFromLocal() {
 		var stringifiedProducts = localStorage.getItem('products');
-		console.log(stringifiedProducts );
 		if (stringifiedProducts == undefined || $.isEmptyObject(stringifiedProducts)) {
 			return {};
 		}
@@ -80,9 +79,7 @@ $(function(){
 		$(".trash-item-in-cart").click(function() {
 			var productId = $(this).attr("id");
 			var products = getProductsFromLocal();
-			console.log(products);
 			delete products[productId];
-			console.log(products);
 			localStorage.setItem("products", JSON.stringify(products));
 			populateCart();
 		});	
@@ -115,10 +112,11 @@ $(function(){
 	}) 
 	
 	function postLocalCartToServer() {
+		console.log("ping");
 		var products = getProductsFromLocal();
 		var requestCounter = Object.keys(products).length;
 		for (var id in products) {
-			$.post("/add-product-to-cart", {"product": id, "quantity": products[id]}, function(){
+			$.post("/cart/add", {"product": id, "quantity": products[id]}, function(){
 				requestCounter--;
 				if (requestCounter == 0) {
 					localStorage.setItem("products", JSON.stringify({}));
@@ -129,13 +127,6 @@ $(function(){
 	}
 	
 });
-
-
-//<button id="keep-old-cart-button" type="button" class="btn btn-default">Keep old cart</button>
-//<button id="keep-new-cart-button" type="button" class="btn btn-primary">Keep new cart</button>
-//<button id="merge-carts-button" type="button" class="btn btn-success">Merge the carts</button>
-
-
 
 
 

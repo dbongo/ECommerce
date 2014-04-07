@@ -15,24 +15,24 @@ GET     /categories/:id             		controllers.CategoryController.category(id
 POST    /categories                 		controllers.CategoryController.newCategory()
 
 GET     /cart                       		controllers.CartController.cart()
-POST    /add-product-to-cart                controllers.CartController.addProductToCart()
-GET 	/remove-product-from-cart/:id		controllers.CartController.removeProduct(id: Int)
+GET     /cart/merge                         controllers.CartController.mergeCart()
+POST    /cart/clear                         controllers.CartController.clearCart()
+POST    /cart/add                			controllers.CartController.addProductToCart()
+DELETE 	/cart/remove/:id					controllers.CartController.removeProduct(id: Int)
 
-POST    /checkout                   		controllers.CheckoutController.checkout()
 GET     /orders                             controllers.OrderController.orders()
+POST    /checkout                   		controllers.CheckoutController.checkout()
 
 GET     /admin                       		controllers.AdminController.start()
 GET     /admin/product-form   	            controllers.AdminController.productForm()
 GET     /admin/category-form                controllers.AdminController.categoryForm()
 
 POST    /login                    			controllers.AuthenticationController.login()
-GET     /logout                 			controllers.AuthenticationController.logout()
+POST     /logout                 			controllers.AuthenticationController.logout()
 
 GET 	/register							controllers.UserController.userForm()
 POST    /user			                    controllers.UserController.newUser()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               		controllers.Assets.at(path="/public", file)
-GET     /cart/merge                         controllers.CartController.mergeCart()
-POST    /cart/clear                         controllers.CartController.clearCart()
 GET     /*a		                            controllers.Application.fourOFour(a)
