@@ -59,4 +59,40 @@ public class Product {
 	public String getImgUrl() {
 		return imgUrl;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.id);
+		sb.append(", ");
+		sb.append(this.name);
+		sb.append(", ");
+		sb.append(this.description);
+		sb.append(", ");
+		sb.append(this.imgUrl);
+		sb.append(", ");
+		sb.append(this.price);
+		for (Category category : categories) {
+			sb.append('\n');
+			sb.append(category.getId());
+		}
+		return sb.toString();
+	}
+	
+	@Override
+	public int hashCode() {
+		return id * 37;
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if (this == other) {
+			return true;
+		}
+		if (other instanceof Product) {
+			Product otherProduct = (Product)other;
+			return otherProduct.id == this.id;
+		}	
+		return false;
+	}
 }

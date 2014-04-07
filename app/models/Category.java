@@ -35,4 +35,26 @@ public class Category {
 	public String getIcon() {
 		return icon;
 	}
+	
+	@Override
+	public String toString() {
+		return this.id + ", " + this.name + ", " + this.icon;
+	}
+	
+	@Override
+	public int hashCode() {
+		return 37*id;
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if (this == other) {
+			return true;
+		}
+		if (other instanceof Category) {
+			Category otherCategory = (Category)other;
+			return otherCategory.id == this.id;
+		}	
+		return false;
+	}
 }

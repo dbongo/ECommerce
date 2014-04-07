@@ -157,4 +157,48 @@ public class User {
 		}
 		return null;
 	}
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.id);
+		sb.append(", ");
+		sb.append(this.firstname);
+		sb.append(", ");
+		sb.append(this.surname);
+		sb.append(", ");
+		sb.append(this.email);
+		sb.append(", ");
+		sb.append(this.status);
+		sb.append('\n');
+		sb.append("Cart:");
+		for (CartProductQuantity cpq : cart) {
+			sb.append('\n');
+			sb.append(cpq.getId());
+		}
+		sb.append('\n');
+		sb.append("Orders:");
+		for (ECOrder order: orders) {
+			sb.append('\n');
+			sb.append(order.getId());
+		}
+		return sb.toString();
+	}
+	
+	@Override
+	public int hashCode() {
+		return id * 37;
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if (this == other) {
+			return true;
+		}
+		if (other instanceof User) {
+			User otherUser = (User)other;
+			return otherUser.id == this.id;
+		}	
+		return false;
+	}
+	
 }

@@ -29,7 +29,7 @@ public class ECOrder {
 	@Id
 	@GeneratedValue
 	@Column(name="ID")
-	public int id;
+	private int id;
 	@ManyToOne(fetch=FetchType.LAZY)
 	private User user;
 	@Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
@@ -52,6 +52,10 @@ public class ECOrder {
 		return user;
 	}
 
+	public int getId() {
+		return id;
+	}
+	
 	public Date getDate() {
 		return date;
 	}
@@ -88,4 +92,37 @@ public class ECOrder {
 		return dateMap;
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.id);
+		sb.append(", ");
+		sb.append(this.user.getId());
+		sb.append(", ");
+		sb.append(this.date);
+		for (OrderProductQuantity opq : opqs) {
+			sb.append('\n');
+			sb.append(opq);
+		}
+		return sb.toString();
+	}
+	
+	@Override
+	public int hashCode() {
+		return id * 37;
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if (this == other) {
+			return true;
+		}
+		if (other instanceof ECOrder) {
+			ECOrder otherECOrder = (ECOrder)other;
+			return otherECOrder.id == this.id;
+		}	
+		return false;
+	}
+
+
 }
