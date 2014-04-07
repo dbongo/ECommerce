@@ -28,7 +28,7 @@ GET     /admin/product-form   	            controllers.AdminController.productFo
 GET     /admin/category-form                controllers.AdminController.categoryForm()
 
 POST    /login                    			controllers.AuthenticationController.login()
-POST     /logout                 			controllers.AuthenticationController.logout()
+POST    /logout                 			controllers.AuthenticationController.logout()
 
 GET 	/register							controllers.UserController.userForm()
 POST    /user			                    controllers.UserController.newUser()
