@@ -10,7 +10,7 @@
 		<a href="/products/@product.getId()">
 			<dic class="col-sm-3 product-thumbnail">
 				<div class="image-cropper img-rounded">
-					<img src="@if(product.getImgUrl() == null){/assets/no-image.jpg} else {@product.getImgUrl()}" alt="@product.getName()" class="img-rounded product-thumb-image">
+					<img src="@product.getImagePath()" alt="@product.getName()" onError="this.onerror=null;this.src='assets/images/no-image.jpg';"  class="img-rounded product-thumb-image">
 				</div>
 				<h4>@product.getName()</h4>
 			</dic>

@@ -13,7 +13,7 @@
 		</p>
 	</div>
 	<div class="col-md-5">
-		<img src="@product.getImgUrl()" class="img-rounded img-responsive"/>
+		<img src="@product.getImagePath()" onError="this.onerror=null;this.src='assets/images/no-image.jpg';" class="img-rounded img-responsive"/>
 	</div>
 	<div class="col-md-6 buy-container">
 		<h3 class="pricetag">@if(product.getPrice() % 1 != 0) {@("%.2f".format(product.getPrice()))} else {@("%.0f".format(product.getPrice()))} kr</h3>

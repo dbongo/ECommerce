@@ -2,20 +2,26 @@ package controllers;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.persistence.TypedQuery;
+
+import org.springframework.format.Formatter;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import models.Category;
 import models.Product;
+import play.data.Form;
+import play.data.format.Formatters;
 import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import scala.reflect.macros.ParseException;
 import views.html.*;
 
 public class ProductController extends Controller {
@@ -45,35 +51,33 @@ public class ProductController extends Controller {
 		}
 		ObjectNode result = Json.newObject();
 		result.put("name", product.getName());
-		result.put("image", product.getImgUrl());
+		result.put("image", product.getImagePath());
 		result.put("id", product.getId());
 		result.put("price", product.getPrice());
 		
 		return ok(result);
 	}
 	
+	
 	@Transactional
 	@Security.Authenticated(MyAdminAuthenticator.class)
 	public static Result newProduct() {
-		Map<String, String[]> form = request().body().asFormUrlEncoded();
 		
-		List<Category> categories = new LinkedList<>();
+		Formatters.register(Category.class, new Formatters.SimpleFormatter<Category>(){
+
+			@Override
+			public Category parse(String id, Locale arg1)
+					throws java.text.ParseException {
+				return JPA.em().find(Category.class, Integer.parseInt(id));
+			}
+
+			@Override
+			public String print(Category category, Locale arg1) {
+				return category.getId() + "";
+			}
+		});		
 		
-		for (String categoryId: form.get("categories")) {
-			categories.add(JPA.em().find(Category.class, Integer.parseInt(categoryId)));
-		}
-		
-		String name = form.get("name")[0];
-		String description = form.get("description")[0];
-		String imgName = form.get("img-name")[0];
-		double price = Double.parseDouble(form.get("price")[0]);
-		
-		if (imgName.equals("")) {
-			imgName = null;
-		}
-		
-		Product product = new Product(name, description, imgName, price, categories);
-		
+		Product product = Form.form(Product.class).bindFromRequest().get();
 		JPA.em().persist(product);
 		
 		return redirect(routes.ProductController.allProducts());

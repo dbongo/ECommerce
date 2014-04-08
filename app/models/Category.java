@@ -16,8 +16,8 @@ public class Category {
 	private String icon;
 	
 	public Category(String name, String icon) {
-		this.name = name;
-		this.icon = icon;	
+		this.setName(name);
+		this.setIcon(icon);	
 	}
 	
 	public Category(){
@@ -38,7 +38,7 @@ public class Category {
 	
 	@Override
 	public String toString() {
-		return this.id + ", " + this.name + ", " + this.icon;
+		return this.id + ", " + this.getName() + ", " + this.getIcon();
 	}
 	
 	@Override
@@ -56,5 +56,13 @@ public class Category {
 			return otherCategory.id == this.id;
 		}	
 		return false;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 }

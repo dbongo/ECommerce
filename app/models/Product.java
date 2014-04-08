@@ -22,14 +22,14 @@ public class Product {
 	private double price;
 	@ManyToMany
 	private List<Category> categories;
-	private String imgUrl;
+	private String imagePath;
 
-	public Product(String name, String description, String imgUrl, double price, List<Category> categories) {
-		this.name = name;
-		this.description = description;
-		this.imgUrl = imgUrl;
-		this.price = price;
-		this.categories = categories;	
+	public Product(String name, String description, String imagePath, double price, List<Category> categories) {
+		this.setName(name);
+		this.setDescription(description);
+		this.setImagePath(imagePath);
+		this.setPrice(price);
+		this.setCategories(categories);	
 	}
 	
 	public Product() {
@@ -56,8 +56,13 @@ public class Product {
 		return categories;
 	}
 
-	public String getImgUrl() {
-		return imgUrl;
+	public String getImagePath() {
+//		if (imagePath == null || imagePath.equals("") || imagePath.equals("/assets/images/")) {
+//			this.setImagePath("/assets/images/no-image.jpg");
+//		} else {
+//			this.setImagePath(imagePath);
+//		}
+		return imagePath;
 	}
 	
 	@Override
@@ -65,16 +70,18 @@ public class Product {
 		StringBuilder sb = new StringBuilder();
 		sb.append(this.id);
 		sb.append(", ");
-		sb.append(this.name);
+		sb.append(this.getName());
 		sb.append(", ");
-		sb.append(this.description);
+		sb.append(this.getDescription());
 		sb.append(", ");
-		sb.append(this.imgUrl);
+		sb.append(this.getImagePath());
 		sb.append(", ");
-		sb.append(this.price);
-		for (Category category : categories) {
-			sb.append('\n');
-			sb.append(category.getId());
+		sb.append(this.getPrice());
+		if (getCategories() != null) {
+			for (Category category : getCategories()) {
+				sb.append('\n');
+				sb.append(category.getId());
+			}
 		}
 		return sb.toString();
 	}
@@ -94,5 +101,25 @@ public class Product {
 			return otherProduct.id == this.id;
 		}	
 		return false;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 }

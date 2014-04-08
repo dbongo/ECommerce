@@ -19,7 +19,7 @@
 				<tbody>
 					@for(opq <- order.getOpqs()) {
 						<tr>
-							<td><img class="img-rounded" src="@opq.getProduct().getImgUrl()"> @opq.getProduct().getName()</td>
+							<td><img class="img-rounded" src="@opq.getProduct().getImagePath()"> @opq.getProduct().getName()</td>
 							<td>@opq.getQuantity()</td>
 							<td>@opq.getPricePerUnit()</td>
 						</tr>	

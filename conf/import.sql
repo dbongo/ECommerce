@@ -1,10 +1,10 @@
-INSERT INTO `Product` (`ID`,`description`,`imgUrl`,`name`,`price`) VALUES (1,'There and back again','/assets/images/hobbit.jpg','Hobbit',100);
-INSERT INTO `Product` (`ID`,`description`,`imgUrl`,`name`,`price`) VALUES (2,'This book is aaaaawesome!','/assets/images/bro-code.jpg','The Bro Code',9.99);
-INSERT INTO `Product` (`ID`,`description`,`imgUrl`,`name`,`price`) VALUES (3,'Tinman goes wild','/assets/images/iron-man-3.jpg','Iron Man 3',320.90);
-INSERT INTO `Product` (`ID`,`description`,`imgUrl`,`name`,`price`) VALUES (4,'By the power of Zues!','/assets/images/thor-2.jpg','Thor 2',430);
-INSERT INTO `Product` (`ID`,`description`,`imgUrl`,`name`,`price`) VALUES (5,'It sucks','/assets/images/true-blood.jpg','True Blood',420);
-INSERT INTO `Product` (`ID`,`description`,`imgUrl`,`name`,`price`) VALUES (6,'Wibbly wobbly timey wimey','/assets/images/doctor-who.jpg','Doctor Who',435.50);
-INSERT INTO `Product` (`ID`,`description`,`imgUrl`,`name`,`price`) VALUES (7,'All men must die!','/assets/images/song-of-ice-and-fire.jpg','Game of Thrones',430);
+INSERT INTO `Product` (`ID`,`description`,`imagePath`,`name`,`price`) VALUES (1,'There and back again','/assets/images/hobbit.jpg','Hobbit',100);
+INSERT INTO `Product` (`ID`,`description`,`imagePath`,`name`,`price`) VALUES (2,'This book is aaaaawesome!','/assets/images/bro-code.jpg','The Bro Code',9.99);
+INSERT INTO `Product` (`ID`,`description`,`imagePath`,`name`,`price`) VALUES (3,'Tinman goes wild','/assets/images/iron-man-3.jpg','Iron Man 3',320.90);
+INSERT INTO `Product` (`ID`,`description`,`imagePath`,`name`,`price`) VALUES (4,'By the power of Zues!','/assets/images/thor-2.jpg','Thor 2',430);
+INSERT INTO `Product` (`ID`,`description`,`imagePath`,`name`,`price`) VALUES (5,'It sucks','/assets/images/true-blood.jpg','True Blood',420);
+INSERT INTO `Product` (`ID`,`description`,`imagePath`,`name`,`price`) VALUES (6,'Wibbly wobbly timey wimey','/assets/images/doctor-who.jpg','Doctor Who',435.50);
+INSERT INTO `Product` (`ID`,`description`,`imagePath`,`name`,`price`) VALUES (7,'All men must die!','/assets/images/song-of-ice-and-fire.jpg','Game of Thrones',430);
 INSERT INTO `Category` (`ID`,`icon`,`name`) VALUES (1,'fa-book','Books');
 INSERT INTO `Category` (`ID`,`icon`,`name`) VALUES (2,'fa-film','Movies');
 INSERT INTO `Category` (`ID`,`icon`,`name`) VALUES (3,'fa-desktop','TV-Shows');

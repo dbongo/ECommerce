@@ -23,7 +23,7 @@
 	    			<label for="img-name" class="col-sm-2 control-label">Image name</label>
 	    			<div class="col-lg-8">
 	    			<div class="input-group">
-	    				<input type="text" class="form-control" id="img-name" name="img-name" placeholder="Image">
+	    				<input type="text" class="form-control" id="img-name" name="imagePath" placeholder="Image">
 	    				<div class="input-group-btn">
 					        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span id="image-source-button">Remote</span> <span class="caret"></span></button>
 					        <ul id="image-source-list" class="dropdown-menu pull-right">
@@ -43,7 +43,7 @@
 	  			<div class="form-group">
 	  				<label for="categories" class="col-sm-2 control-label">Categories</label>
 	  				<div class="col-sm-8">
-		  				<select multiple class="form-control" name="categories">
+		  				<select multiple class="form-control" name="categories[]">
 		  					@for(category <- categories) {
 		  						<option value="@category.getId()"> @category.getName()</option>
 		  					}
